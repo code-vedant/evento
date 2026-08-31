@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# College Club & Event Management Platform
 
-## Getting Started
+A **multi-tenant college club and event management platform** where each college club gets its own customizable subdomain and website experience while sharing a common platform, backend, and infrastructure.
 
-First, run the development server:
+The goal is to give every club a sense of **ownership and uniqueness** without requiring clubs to build or maintain their own websites.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Concept
+
+Each club will have its own subdomain:
+
+```text
+yourplatform.com
+│
+├── robotics.yourplatform.com
+├── coding.yourplatform.com
+├── ieee.yourplatform.com
+└── photography.yourplatform.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Although each subdomain represents a different club, all clubs will use the same underlying application and infrastructure.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clubs will eventually be able to customize their branding, homepage layout, events, team information, and other website sections.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Planned Features
 
-## Learn More
+* Multi-tenant club architecture
+* Unique subdomain for each club
+* Club-specific branding and UI
+* Event creation and management
+* Student event registration
+* Club member management
+* Role-based access control
+* Customizable club websites
+* Centralized platform administration
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Next.js** — Frontend and application framework
+* **TypeScript** — Type-safe development
+* **Supabase** — PostgreSQL database, authentication, storage and Row Level Security
+* **Tailwind CSS** — Styling
+* **shadcn/ui** — UI components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
+The platform will use a shared multi-tenant architecture.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+                    Main Platform
+                          │
+                   Tenant Resolution
+                          │
+          ┌───────────────┼───────────────┐
+          │               │               │
+       Robotics         Coding           IEEE
+        Club             Club            Club
+          │               │               │
+          └───────────────┼───────────────┘
+                          │
+                     Shared Backend
+                          │
+                       Supabase
+                          │
+                    PostgreSQL + Auth
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Each club will have its own tenant identity and data while using the same application.
+
+## Project Status
+
+**Status: Early Development**
+
+The project is currently in the initial planning and architecture stage. The first development milestones will focus on the database structure, authentication, tenant management, and subdomain-based routing.
+
+## Development Roadmap
+
+```text
+1. Project & Next.js setup
+        ↓
+2. Supabase database design
+        ↓
+3. Authentication & roles
+        ↓
+4. Multi-tenant architecture
+        ↓
+5. Subdomain routing
+        ↓
+6. Event management
+        ↓
+7. Event registration
+        ↓
+8. Club customization
+        ↓
+9. Website builder
+        ↓
+10. Production deployment
+```
+
+## Vision
+
+The long-term goal is to provide colleges with a single platform where every club can have a **unique digital presence** while the college and platform administrators can manage everything centrally.
+
+> **One platform. Multiple clubs. Each club has its own identity.**
