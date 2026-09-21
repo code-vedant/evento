@@ -21,6 +21,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import EditProfilePopup from "./_components/EditProfilePopup";
 
 const upcomingEvents = [
   {
@@ -69,16 +70,24 @@ export default function ProfilePage() {
     "overview" | "events" | "settings"
   >("overview");
 
+  const [isEditPopupOpen, setEditPopupOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setEditPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setEditPopupOpen(false);
+  };
+
   return (
     <main className="min-h-screen bg-[#08080b] text-white">
-
       {/* -------------------------------------------------------------- */}
       {/* PROFILE HERO                                                   */}
       {/* -------------------------------------------------------------- */}
 
       <section className="border-b border-white/5">
         <div className="mx-auto max-w-6xl px-5 pb-8 pt-28 lg:px-8">
-
           {/* Breadcrumb */}
           <div className="mb-8 flex items-center gap-2 text-xs text-zinc-600">
             <Link href="/" className="hover:text-zinc-300">
@@ -91,10 +100,8 @@ export default function ProfilePage() {
           </div>
 
           <div className="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
-
             {/* Identity */}
             <div className="flex items-center gap-5">
-
               <div className="relative">
                 <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-violet-500 to-indigo-700 text-3xl font-bold shadow-xl shadow-violet-900/20">
                   V
@@ -120,9 +127,7 @@ export default function ProfilePage() {
                   </span>
                 </div>
 
-                <p className="mt-1 text-sm text-zinc-500">
-                  @vedantuekey
-                </p>
+                <p className="mt-1 text-sm text-zinc-500">@vedantuekey</p>
 
                 <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-zinc-600">
                   <span className="flex items-center gap-1.5">
@@ -140,7 +145,10 @@ export default function ProfilePage() {
 
             {/* Actions */}
             <div className="flex gap-2">
-              <button className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-800">
+              <button
+                className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2.5 text-sm font-medium transition hover:bg-zinc-800"
+                onClick={handleEditClick}
+              >
                 <Edit3 className="h-4 w-4" />
                 Edit profile
               </button>
@@ -151,22 +159,21 @@ export default function ProfilePage() {
             </div>
           </div>
 
+          {/* Render the EditProfilePopup */}
+          {isEditPopupOpen && (
+            <EditProfilePopup
+              isOpen={isEditPopupOpen}
+              onClose={handleClosePopup}
+            />
+          )}
+
           {/* Stats */}
           <div className="mt-9 grid grid-cols-3 divide-x divide-white/5 overflow-hidden rounded-2xl border border-white/5 bg-zinc-900/40">
-            <ProfileStat
-              value="12"
-              label="Events attended"
-            />
+            <ProfileStat value="12" label="Events attended" />
 
-            <ProfileStat
-              value="8"
-              label="Tickets"
-            />
+            <ProfileStat value="8" label="Tickets" />
 
-            <ProfileStat
-              value="4"
-              label="Communities"
-            />
+            <ProfileStat value="4" label="Communities" />
           </div>
         </div>
       </section>
@@ -205,18 +212,11 @@ export default function ProfilePage() {
       {/* -------------------------------------------------------------- */}
 
       <div className="mx-auto max-w-6xl px-5 py-12 lg:px-8">
+        {activeTab === "overview" && <Overview />}
 
-        {activeTab === "overview" && (
-          <Overview />
-        )}
+        {activeTab === "events" && <Events />}
 
-        {activeTab === "events" && (
-          <Events />
-        )}
-
-        {activeTab === "settings" && (
-          <SettingsPanel />
-        )}
+        {activeTab === "settings" && <SettingsPanel />}
       </div>
     </main>
   );
@@ -229,10 +229,8 @@ export default function ProfilePage() {
 function Overview() {
   return (
     <div className="grid gap-12 lg:grid-cols-[1fr_320px]">
-
       {/* Main */}
       <div>
-
         <SectionHeader
           title="Upcoming events"
           description="Events you've registered for."
@@ -240,10 +238,7 @@ function Overview() {
 
         <div className="mt-6 space-y-4">
           {upcomingEvents.map((event) => (
-            <UpcomingEvent
-              key={event.title}
-              event={event}
-            />
+            <UpcomingEvent key={event.title} event={event} />
           ))}
         </div>
 
@@ -255,10 +250,7 @@ function Overview() {
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {pastEvents.map((event) => (
-              <PastEvent
-                key={event.title}
-                event={event}
-              />
+              <PastEvent key={event.title} event={event} />
             ))}
           </div>
         </div>
@@ -266,17 +258,12 @@ function Overview() {
 
       {/* Sidebar */}
       <aside className="space-y-5">
-
         {/* Profile completion */}
         <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-5">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium">
-              Profile completion
-            </p>
+            <p className="text-sm font-medium">Profile completion</p>
 
-            <span className="text-xs text-violet-400">
-              80%
-            </span>
+            <span className="text-xs text-violet-400">80%</span>
           </div>
 
           <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-zinc-800">
@@ -284,8 +271,7 @@ function Overview() {
           </div>
 
           <p className="mt-3 text-xs leading-5 text-zinc-600">
-            Add your college and interests to get better event
-            recommendations.
+            Add your college and interests to get better event recommendations.
           </p>
 
           <button className="mt-4 text-xs font-medium text-violet-400 hover:text-violet-300">
@@ -297,9 +283,7 @@ function Overview() {
         <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-5">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium">
-                Your communities
-              </p>
+              <p className="text-sm font-medium">Your communities</p>
 
               <p className="mt-1 text-xs text-zinc-600">
                 Communities you&apos;re following.
@@ -316,17 +300,9 @@ function Overview() {
               members="1.8K members"
             />
 
-            <Community
-              letter="N"
-              name="NSS SSTC"
-              members="620 members"
-            />
+            <Community letter="N" name="NSS SSTC" members="620 members" />
 
-            <Community
-              letter="C"
-              name="Coding Club"
-              members="430 members"
-            />
+            <Community letter="C" name="Coding Club" members="430 members" />
           </div>
 
           <button className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-800 py-2.5 text-xs font-medium hover:bg-zinc-800">
@@ -343,9 +319,7 @@ function Overview() {
             </div>
 
             <div>
-              <p className="text-sm font-medium">
-                Account secured
-              </p>
+              <p className="text-sm font-medium">Account secured</p>
 
               <p className="mt-1 text-xs text-zinc-600">
                 Your account is protected.
@@ -387,10 +361,7 @@ function Events() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {upcomingEvents.map((event) => (
-          <UpcomingEvent
-            key={event.title}
-            event={event}
-          />
+          <UpcomingEvent key={event.title} event={event} />
         ))}
       </div>
     </div>
@@ -410,7 +381,6 @@ function SettingsPanel() {
       />
 
       <div className="mt-8 space-y-4">
-
         <SettingsItem
           icon={<User className="h-4 w-4" />}
           title="Personal information"
@@ -441,9 +411,7 @@ function SettingsPanel() {
           </div>
 
           <div>
-            <p className="text-sm font-medium text-red-400">
-              Sign out
-            </p>
+            <p className="text-sm font-medium text-red-400">Sign out</p>
 
             <p className="mt-1 text-xs text-zinc-600">
               Sign out of your Evento account.
@@ -459,15 +427,10 @@ function SettingsPanel() {
 /* COMPONENTS                                                             */
 /* ---------------------------------------------------------------------- */
 
-function UpcomingEvent({
-  event,
-}: {
-  event: (typeof upcomingEvents)[number];
-}) {
+function UpcomingEvent({ event }: { event: (typeof upcomingEvents)[number] }) {
   return (
     <div className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/40 transition hover:border-violet-500/20">
       <div className="flex flex-col sm:flex-row">
-
         <div className="relative h-44 shrink-0 sm:h-auto sm:w-52">
           <Image
             width={1080}
@@ -487,14 +450,10 @@ function UpcomingEvent({
                 {event.type}
               </span>
 
-              <span className="text-xs text-zinc-600">
-                Registered
-              </span>
+              <span className="text-xs text-zinc-600">Registered</span>
             </div>
 
-            <h3 className="mt-3 text-lg font-semibold">
-              {event.title}
-            </h3>
+            <h3 className="mt-3 text-lg font-semibold">{event.title}</h3>
 
             <div className="mt-3 space-y-2 text-xs text-zinc-500">
               <div className="flex items-center gap-2">
@@ -518,9 +477,7 @@ function UpcomingEvent({
             <div className="flex items-center gap-2">
               <Ticket className="h-4 w-4 text-violet-400" />
 
-              <span className="text-xs text-zinc-500">
-                {event.ticket}
-              </span>
+              <span className="text-xs text-zinc-500">{event.ticket}</span>
             </div>
 
             <button className="flex items-center gap-1.5 text-xs font-medium text-violet-400 hover:text-violet-300">
@@ -534,17 +491,13 @@ function UpcomingEvent({
   );
 }
 
-function PastEvent({
-  event,
-}: {
-  event: (typeof pastEvents)[number];
-}) {
+function PastEvent({ event }: { event: (typeof pastEvents)[number] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/40">
       <div className="relative h-36">
         <Image
-        width={1080}
-        height={1080}
+          width={1080}
+          height={1080}
           src={event.image}
           alt={event.title}
           className="h-full w-full object-cover"
@@ -558,9 +511,7 @@ function PastEvent({
       </div>
 
       <div className="p-4">
-        <h3 className="text-sm font-semibold">
-          {event.title}
-        </h3>
+        <h3 className="text-sm font-semibold">{event.title}</h3>
 
         <div className="mt-3 flex items-center justify-between text-xs text-zinc-600">
           <span>{event.date}</span>
@@ -587,34 +538,20 @@ function Community({
       </div>
 
       <div className="min-w-0">
-        <p className="truncate text-xs font-medium">
-          {name}
-        </p>
+        <p className="truncate text-xs font-medium">{name}</p>
 
-        <p className="mt-0.5 text-[10px] text-zinc-600">
-          {members}
-        </p>
+        <p className="mt-0.5 text-[10px] text-zinc-600">{members}</p>
       </div>
     </div>
   );
 }
 
-function ProfileStat({
-  value,
-  label,
-}: {
-  value: string;
-  label: string;
-}) {
+function ProfileStat({ value, label }: { value: string; label: string }) {
   return (
     <div className="px-4 py-5 text-center">
-      <p className="text-xl font-semibold">
-        {value}
-      </p>
+      <p className="text-xl font-semibold">{value}</p>
 
-      <p className="mt-1 text-[11px] text-zinc-600">
-        {label}
-      </p>
+      <p className="mt-1 text-[11px] text-zinc-600">{label}</p>
     </div>
   );
 }
@@ -628,13 +565,9 @@ function SectionHeader({
 }) {
   return (
     <div>
-      <h2 className="text-xl font-semibold">
-        {title}
-      </h2>
+      <h2 className="text-xl font-semibold">{title}</h2>
 
-      <p className="mt-1.5 text-sm text-zinc-600">
-        {description}
-      </p>
+      <p className="mt-1.5 text-sm text-zinc-600">{description}</p>
     </div>
   );
 }
@@ -652,9 +585,7 @@ function Tab({
     <button
       onClick={onClick}
       className={`relative whitespace-nowrap py-4 text-sm transition ${
-        active
-          ? "font-medium text-white"
-          : "text-zinc-600 hover:text-zinc-300"
+        active ? "font-medium text-white" : "text-zinc-600 hover:text-zinc-300"
       }`}
     >
       {children}
@@ -682,13 +613,9 @@ function SettingsItem({
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium">
-          {title}
-        </p>
+        <p className="text-sm font-medium">{title}</p>
 
-        <p className="mt-1 text-xs leading-5 text-zinc-600">
-          {description}
-        </p>
+        <p className="mt-1 text-xs leading-5 text-zinc-600">{description}</p>
       </div>
 
       <ChevronRight className="h-4 w-4 shrink-0 text-zinc-700" />
