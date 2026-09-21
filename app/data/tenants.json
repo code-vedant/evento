@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "aws",
+    "name": "AWS Student Community",
+    "shortName": "AWS",
+    "category": "Technology",
+    "description": "A community of student builders, cloud enthusiasts, and future technology leaders.",
+    "location": "SSTC, Bhilai",
+    "accent": "#FF9900",
+    "hero": {
+      "title": "Build. Learn. Lead.",
+      "subtitle": "Join a community of students building the future with AWS."
+    },
+    "stats": {
+      "members": "500+",
+      "events": "25+",
+      "projects": "40+"
+    }
+  },
+  {
+    "slug": "nss",
+    "name": "NSS SSTC",
+    "shortName": "NSS",
+    "category": "Social & Community",
+    "description": "Empowering students to serve society, develop leadership, and create meaningful impact.",
+    "location": "SSTC, Bhilai",
+    "accent": "#E63946",
+    "hero": {
+      "title": "Serve. Inspire. Impact.",
+      "subtitle": "Together, let's create positive change in our community."
+    },
+    "stats": {
+      "members": "300+",
+      "events": "30+",
+      "volunteers": "150+"
+    }
+  },
+  {
+    "slug": "gdsc",
+    "name": "Google Developer Student Club",
+    "shortName": "GDSC",
+    "category": "Technology",
+    "description": "A developer community where students learn, build projects, and grow together.",
+    "location": "SSTC, Bhilai",
+    "accent": "#4285F4",
+    "hero": {
+      "title": "Learn. Build. Connect.",
+      "subtitle": "Grow your developer skills with a community of builders."
+    },
+    "stats": {
+      "members": "400+",
+      "events": "20+",
+      "projects": "35+"
+    }
+  }
+]
