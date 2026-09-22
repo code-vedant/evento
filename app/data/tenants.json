@@ -2,55 +2,285 @@
   {
     "slug": "aws",
     "name": "AWS Student Community",
-    "shortName": "AWS",
-    "category": "Technology",
-    "description": "A community of student builders, cloud enthusiasts, and future technology leaders.",
-    "location": "SSTC, Bhilai",
-    "accent": "#FF9900",
-    "hero": {
-      "title": "Build. Learn. Lead.",
-      "subtitle": "Join a community of students building the future with AWS."
+    "template": "aurora",
+
+    "theme": {
+      "accent": "#FF9900",
+      "background": "#08080b",
+      "foreground": "#ffffff"
     },
-    "stats": {
-      "members": "500+",
-      "events": "25+",
-      "projects": "40+"
+
+    "navbar": {
+      "logo": "AWS",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Events",
+          "href": "#events"
+        },
+        {
+          "label": "About",
+          "href": "#about"
+        },
+        {
+          "label": "Community",
+          "href": "#community"
+        }
+      ],
+      "cta": {
+        "label": "Join Community",
+        "href": "#join"
+      }
+    },
+
+    "hero": {
+      "badge": "AWS Student Community",
+      "title": "Build. Learn. Lead.",
+      "description": "Join a community of student builders, cloud enthusiasts, and future technology leaders.",
+      "primaryCta": {
+        "label": "Explore Events",
+        "href": "#events"
+      },
+      "secondaryCta": {
+        "label": "Join Community",
+        "href": "#join"
+      }
+    },
+
+    "stats": [
+      {
+        "label": "Members",
+        "value": "500+"
+      },
+      {
+        "label": "Events",
+        "value": "25+"
+      },
+      {
+        "label": "Projects",
+        "value": "40+"
+      }
+    ],
+
+    "about": {
+      "eyebrow": "ABOUT THE COMMUNITY",
+      "title": "More than a club. It's a community.",
+      "description": "A student-led community focused on cloud computing, technology, learning, networking, and building real-world projects.",
+      "location": "SSTC, Bhilai"
+    },
+
+    "events": {
+      "eyebrow": "UPCOMING",
+      "title": "Upcoming Events",
+      "description": "Discover workshops, hackathons, meetups, and community events."
+    },
+
+    "cta": {
+      "eyebrow": "JOIN US",
+      "title": "Build something meaningful.",
+      "description": "Become part of a community of students who learn, build, and grow together.",
+      "button": {
+        "label": "Join Community",
+        "href": "#join"
+      }
+    },
+
+    "footer": {
+      "description": "A student community powered by Evento.",
+      "copyright": "AWS Student Community"
     }
   },
+
   {
     "slug": "nss",
     "name": "NSS SSTC",
-    "shortName": "NSS",
-    "category": "Social & Community",
-    "description": "Empowering students to serve society, develop leadership, and create meaningful impact.",
-    "location": "SSTC, Bhilai",
-    "accent": "#E63946",
-    "hero": {
-      "title": "Serve. Inspire. Impact.",
-      "subtitle": "Together, let's create positive change in our community."
+    "template": "community",
+
+    "theme": {
+      "accent": "#E63946",
+      "background": "#08080b",
+      "foreground": "#ffffff"
     },
-    "stats": {
-      "members": "300+",
-      "events": "30+",
-      "volunteers": "150+"
+
+    "navbar": {
+      "logo": "NSS",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Activities",
+          "href": "#events"
+        },
+        {
+          "label": "About",
+          "href": "#about"
+        },
+        {
+          "label": "Volunteers",
+          "href": "#community"
+        }
+      ],
+      "cta": {
+        "label": "Join NSS",
+        "href": "#join"
+      }
+    },
+
+    "hero": {
+      "badge": "National Service Scheme",
+      "title": "Serve. Inspire. Impact.",
+      "description": "Empowering students to serve society, develop leadership, and create meaningful impact.",
+      "primaryCta": {
+        "label": "Explore Activities",
+        "href": "#events"
+      },
+      "secondaryCta": {
+        "label": "Become a Volunteer",
+        "href": "#join"
+      }
+    },
+
+    "stats": [
+      {
+        "label": "Volunteers",
+        "value": "300+"
+      },
+      {
+        "label": "Activities",
+        "value": "30+"
+      },
+      {
+        "label": "Members",
+        "value": "150+"
+      }
+    ],
+
+    "about": {
+      "eyebrow": "ABOUT NSS",
+      "title": "Students serving society.",
+      "description": "NSS provides students with opportunities to understand communities, develop leadership, and contribute through meaningful social activities.",
+      "location": "SSTC, Bhilai"
+    },
+
+    "events": {
+      "eyebrow": "ACTIVITIES",
+      "title": "Our Activities",
+      "description": "Explore social drives, cultural programs, awareness campaigns, volunteering activities, and community initiatives."
+    },
+
+    "cta": {
+      "eyebrow": "GET INVOLVED",
+      "title": "Be the change you want to see.",
+      "description": "Join fellow students and contribute your time, skills, and energy towards meaningful causes.",
+      "button": {
+        "label": "Become a Volunteer",
+        "href": "#join"
+      }
+    },
+
+    "footer": {
+      "description": "National Service Scheme, SSTC.",
+      "copyright": "NSS SSTC"
     }
   },
+
   {
     "slug": "gdsc",
     "name": "Google Developer Student Club",
-    "shortName": "GDSC",
-    "category": "Technology",
-    "description": "A developer community where students learn, build projects, and grow together.",
-    "location": "SSTC, Bhilai",
-    "accent": "#4285F4",
-    "hero": {
-      "title": "Learn. Build. Connect.",
-      "subtitle": "Grow your developer skills with a community of builders."
+    "template": "minimal",
+
+    "theme": {
+      "accent": "#4285F4",
+      "background": "#08080b",
+      "foreground": "#ffffff"
     },
-    "stats": {
-      "members": "400+",
-      "events": "20+",
-      "projects": "35+"
+
+    "navbar": {
+      "logo": "GDSC",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Events",
+          "href": "#events"
+        },
+        {
+          "label": "Projects",
+          "href": "#projects"
+        },
+        {
+          "label": "About",
+          "href": "#about"
+        }
+      ],
+      "cta": {
+        "label": "Join GDSC",
+        "href": "#join"
+      }
+    },
+
+    "hero": {
+      "badge": "Developer Community",
+      "title": "Learn. Build. Connect.",
+      "description": "Grow your developer skills with a community of builders, learners, and technology enthusiasts.",
+      "primaryCta": {
+        "label": "Explore Events",
+        "href": "#events"
+      },
+      "secondaryCta": {
+        "label": "Join Community",
+        "href": "#join"
+      }
+    },
+
+    "stats": [
+      {
+        "label": "Members",
+        "value": "400+"
+      },
+      {
+        "label": "Events",
+        "value": "20+"
+      },
+      {
+        "label": "Projects",
+        "value": "35+"
+      }
+    ],
+
+    "about": {
+      "eyebrow": "ABOUT GDSC",
+      "title": "A community of developers and builders.",
+      "description": "A student developer community where members learn modern technologies, collaborate on projects, participate in workshops, and build together.",
+      "location": "SSTC, Bhilai"
+    },
+
+    "events": {
+      "eyebrow": "LEARN & BUILD",
+      "title": "Upcoming Events",
+      "description": "Join workshops, study jams, hackathons, technical sessions, and developer meetups."
+    },
+
+    "cta": {
+      "eyebrow": "JOIN THE COMMUNITY",
+      "title": "Start building with us.",
+      "description": "Learn new technologies, meet fellow developers, and turn your ideas into real projects.",
+      "button": {
+        "label": "Join GDSC",
+        "href": "#join"
+      }
+    },
+
+    "footer": {
+      "description": "A developer community powered by students.",
+      "copyright": "Google Developer Student Club"
     }
   }
 ]

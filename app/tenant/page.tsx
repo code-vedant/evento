@@ -1,56 +1,17 @@
-// import { notFound } from "next/navigation";
-
-// type TenantPageProps = {
-//   searchParams: Promise<{
-//     tenant?: string;
-//   }>;
-// };
-
-// export default async function TenantPage({
-//   searchParams,
-// }: TenantPageProps) {
-//   const params = await searchParams;
-
-//   const tenantSlug = params.tenant;
-
-//   if (!tenantSlug) {
-//     notFound();
-//   }
-
-//   // Later:
-//   // const club = await getClubBySlug(tenantSlug);
-
-//   return (
-//     <main className="min-h-screen bg-[#08080b] text-white">
-//       <h1 className="text-4xl font-bold">
-//         {tenantSlug} Evento
-//       </h1>
-
-//       <p className="mt-3 text-zinc-400">
-//         Tenant: {tenantSlug}
-//       </p>
-//     </main>
-//   );
-// }
-
 import tenants from "../data/tenants.json";
 import { notFound } from "next/navigation";
 
 type Tenant = (typeof tenants)[number];
 
-type TenantPageProps = {
-  searchParams: Promise<{
-    slug?: string;
-  }>;
-};
-
 export default async function TenantPage({
   searchParams,
-}: TenantPageProps) {
-  const params = await searchParams;
+}: {
+  searchParams: Promise<{ slug?: string }>;
+}) {
+  const { slug } = await searchParams;
 
   const tenant = tenants.find(
-    (item) => item.slug === params.slug
+    (tenant) => tenant.slug === slug
   ) as Tenant | undefined;
 
   if (!tenant) {
@@ -60,64 +21,50 @@ export default async function TenantPage({
   return (
     <main
       className="min-h-screen bg-[#08080b] text-white"
-      style={{
-        "--tenant-accent": tenant.accent,
-      } as React.CSSProperties}
+      style={
+        {
+          "--tenant-accent": tenant.theme.accent,
+        } as React.CSSProperties
+      }
     >
       {/* Navbar */}
       <nav className="border-b border-white/10">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <div
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-black"
+              className="flex h-10 w-10 items-center justify-center rounded-xl font-bold text-black"
               style={{
-                backgroundColor: tenant.accent,
+                backgroundColor: tenant.theme.accent,
               }}
             >
-              {tenant.shortName.slice(0, 2)}
+              {tenant.navbar.logo}
             </div>
 
-            <div>
-              <p className="font-semibold">
-                {tenant.name}
-              </p>
-
-              <p className="text-xs text-zinc-500">
-                Powered by Evento
-              </p>
-            </div>
+            <span className="font-semibold">
+              {tenant.name}
+            </span>
           </div>
 
-          <div className="hidden items-center gap-8 text-sm text-zinc-400 md:flex">
-            <a
-              href="#events"
-              className="transition hover:text-white"
-            >
-              Events
-            </a>
+          <div className="hidden items-center gap-8 md:flex">
+            {tenant.navbar.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm text-zinc-400 transition hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
 
             <a
-              href="#about"
-              className="transition hover:text-white"
-            >
-              About
-            </a>
-
-            <a
-              href="#community"
-              className="transition hover:text-white"
-            >
-              Community
-            </a>
-
-            <button
-              className="rounded-xl px-4 py-2 font-medium text-black"
+              href={tenant.navbar.cta.href}
+              className="rounded-xl px-4 py-2 text-sm font-semibold text-black"
               style={{
-                backgroundColor: tenant.accent,
+                backgroundColor: tenant.theme.accent,
               }}
             >
-              Join Community
-            </button>
+              {tenant.navbar.cta.label}
+            </a>
           </div>
         </div>
       </nav>
@@ -125,46 +72,50 @@ export default async function TenantPage({
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div
-          className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full opacity-20 blur-[140px]"
+          className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full opacity-20 blur-[150px]"
           style={{
-            backgroundColor: tenant.accent,
+            backgroundColor: tenant.theme.accent,
           }}
         />
 
         <div className="relative mx-auto max-w-7xl px-6 py-32">
           <div className="max-w-3xl">
-            <div
-              className="mb-6 inline-flex rounded-full border px-4 py-2 text-sm"
+            <span
+              className="inline-flex rounded-full border px-4 py-2 text-sm"
               style={{
-                borderColor: `${tenant.accent}40`,
-                color: tenant.accent,
-                backgroundColor: `${tenant.accent}10`,
+                borderColor: `${tenant.theme.accent}40`,
+                color: tenant.theme.accent,
+                backgroundColor: `${tenant.theme.accent}10`,
               }}
             >
-              {tenant.category}
-            </div>
+              {tenant.hero.badge}
+            </span>
 
-            <h1 className="text-5xl font-bold tracking-tight md:text-7xl">
+            <h1 className="mt-6 text-5xl font-bold tracking-tight md:text-7xl">
               {tenant.hero.title}
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-              {tenant.hero.subtitle}
+              {tenant.hero.description}
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button
+            <div className="mt-10 flex gap-4">
+              <a
+                href={tenant.hero.primaryCta.href}
                 className="rounded-xl px-6 py-3 font-semibold text-black"
                 style={{
-                  backgroundColor: tenant.accent,
+                  backgroundColor: tenant.theme.accent,
                 }}
               >
-                Explore Events
-              </button>
+                {tenant.hero.primaryCta.label}
+              </a>
 
-              <button className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold transition hover:bg-white/10">
-                Join Community
-              </button>
+              <a
+                href={tenant.hero.secondaryCta.href}
+                className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold"
+              >
+                {tenant.hero.secondaryCta.label}
+              </a>
             </div>
           </div>
         </div>
@@ -172,28 +123,26 @@ export default async function TenantPage({
 
       {/* Stats */}
       <section className="border-y border-white/10 bg-white/[0.02]">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-3">
-          {Object.entries(tenant.stats).map(
-            ([label, value]) => (
+        <div className="mx-auto grid max-w-7xl grid-cols-3">
+          {tenant.stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="border-r border-white/10 px-6 py-10 text-center"
+            >
               <div
-                key={label}
-                className="border-r border-white/10 px-6 py-10 text-center"
+                className="text-4xl font-bold"
+                style={{
+                  color: tenant.theme.accent,
+                }}
               >
-                <p
-                  className="text-4xl font-bold"
-                  style={{
-                    color: tenant.accent,
-                  }}
-                >
-                  {value}
-                </p>
-
-                <p className="mt-2 text-sm capitalize text-zinc-500">
-                  {label}
-                </p>
+                {stat.value}
               </div>
-            )
-          )}
+
+              <div className="mt-2 text-sm text-zinc-500">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -204,70 +153,99 @@ export default async function TenantPage({
       >
         <div className="max-w-2xl">
           <p
-            className="mb-3 text-sm font-medium"
+            className="text-sm font-medium"
             style={{
-              color: tenant.accent,
+              color: tenant.theme.accent,
             }}
           >
-            ABOUT THE COMMUNITY
+            {tenant.about.eyebrow}
           </p>
 
-          <h2 className="text-4xl font-bold">
-            More than a club.
-            <br />
-            It's a community.
+          <h2 className="mt-3 text-4xl font-bold">
+            {tenant.about.title}
           </h2>
 
           <p className="mt-6 leading-8 text-zinc-400">
-            {tenant.description}
+            {tenant.about.description}
           </p>
 
           <p className="mt-4 text-sm text-zinc-500">
-            {tenant.location}
+            {tenant.about.location}
           </p>
         </div>
       </section>
 
-      {/* Events placeholder */}
+      {/* Events */}
       <section
         id="events"
-        className="border-t border-white/10 bg-white/[0.02]"
+        className="border-y border-white/10 bg-white/[0.02]"
       >
         <div className="mx-auto max-w-7xl px-6 py-24">
           <p
             className="text-sm font-medium"
             style={{
-              color: tenant.accent,
+              color: tenant.theme.accent,
             }}
           >
-            UPCOMING
+            {tenant.events.eyebrow}
           </p>
 
           <h2 className="mt-3 text-4xl font-bold">
-            Upcoming Events
+            {tenant.events.title}
           </h2>
 
-          <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-            <p className="text-zinc-500">
-              Events will appear here.
-            </p>
-          </div>
+          <p className="mt-4 max-w-xl text-zinc-400">
+            {tenant.events.description}
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section
+        id="join"
+        className="mx-auto max-w-7xl px-6 py-24"
+      >
+        <div
+          className="rounded-3xl border p-10 md:p-16"
+          style={{
+            borderColor: `${tenant.theme.accent}30`,
+            backgroundColor: `${tenant.theme.accent}08`,
+          }}
+        >
+          <p
+            className="text-sm font-medium"
+            style={{
+              color: tenant.theme.accent,
+            }}
+          >
+            {tenant.cta.eyebrow}
+          </p>
+
+          <h2 className="mt-3 text-4xl font-bold">
+            {tenant.cta.title}
+          </h2>
+
+          <p className="mt-4 max-w-xl text-zinc-400">
+            {tenant.cta.description}
+          </p>
+
+          <a
+            href={tenant.cta.button.href}
+            className="mt-8 inline-block rounded-xl px-6 py-3 font-semibold text-black"
+            style={{
+              backgroundColor: tenant.theme.accent,
+            }}
+          >
+            {tenant.cta.button.label}
+          </a>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-8 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} {tenant.name}
-          </p>
-
-          <p>
-            Powered by{" "}
-            <span className="text-white">
-              Evento
-            </span>
-          </p>
+        <div className="mx-auto flex max-w-7xl justify-between px-6 py-8 text-sm text-zinc-500">
+          <span>{tenant.footer.description}</span>
+          <span>{tenant.footer.copyright}</span>
         </div>
       </footer>
     </main>
