@@ -63,6 +63,65 @@ import {
 /* DATA                                                                       */
 /* -------------------------------------------------------------------------- */
 
+const pricing = [
+  {
+    name: "Free",
+    price: "₹0",
+    description:
+      "Everything a student club needs to create its digital presence and run small events.",
+    popular: false,
+    features: [
+      "Club subdomain",
+      "Club profile & basic branding",
+      "Up to 3 events per year",
+      "Up to 100 registrations per event",
+      "Event landing pages",
+      "QR check-in",
+      "Basic attendance tracking",
+      "Registration exports",
+      "2 admin accounts",
+    ],
+  },
+  {
+    name: "Event Pass",
+    price: "₹199",
+    description:
+      "Pay only when you host an event. Perfect for clubs that organize occasional events.",
+    popular: true,
+    features: [
+      "Everything in Free",
+      "1 event",
+      "Up to 300 registrations",
+      "Custom event page",
+      "QR check-in & attendance",
+      "Custom registration fields",
+      "Digital certificates",
+      "Event analytics",
+      "Registration export",
+      "No recurring payments",
+    ],
+  },
+  {
+    name: "Club",
+    price: "₹999",
+    description:
+      "For active clubs running multiple events throughout the academic year.",
+    popular: false,
+    features: [
+      "Everything in Event Pass",
+      "Up to 10 events per year",
+      "Up to 500 registrations per event",
+      "Custom club branding",
+      "Member management",
+      "Email notifications",
+      "Digital certificates",
+      "Advanced analytics",
+      "Up to 5 admin accounts",
+      "Priority support",
+    ],
+  },
+];
+
 const upcomingEvents = [
   {
     title: "AWS Student Community Day Bhilai 2026",
@@ -162,45 +221,6 @@ const services = [
   },
 ];
 
-const pricing = [
-  {
-    name: "Free",
-    price: "₹0",
-    description: "For individuals and small events.",
-    features: [
-      "Create events",
-      "Basic registration",
-      "Attendee management",
-      "QR ticket verification",
-    ],
-  },
-  {
-    name: "Community",
-    price: "₹499",
-    description: "For clubs and growing communities.",
-    popular: true,
-    features: [
-      "Everything in Free",
-      "Custom club page",
-      "Multiple organizers",
-      "Advanced event management",
-      "Community branding",
-    ],
-  },
-  {
-    name: "Organization",
-    price: "Custom",
-    description: "For institutions and large communities.",
-    features: [
-      "Everything in Community",
-      "Advanced multi-tenant setup",
-      "Custom domain",
-      "Priority support",
-      "Organization analytics",
-    ],
-  },
-];
-
 /* -------------------------------------------------------------------------- */
 /* PAGE                                                                       */
 /* -------------------------------------------------------------------------- */
@@ -211,35 +231,40 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#08080b] text-white">
-
       {/* ------------------------------------------------------------------ */}
       {/* NAVBAR                                                             */}
       {/* ------------------------------------------------------------------ */}
 
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#08080b]/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
-
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600">
               <Ticket className="h-4 w-4" />
             </div>
 
-            <span className="text-lg font-bold tracking-tight">
-              evento
-            </span>
+            <span className="text-lg font-bold tracking-tight">evento</span>
           </Link>
 
           <nav className="hidden items-center gap-7 md:flex">
-            <a href="#events" className="text-sm text-zinc-400 hover:text-white">
+            <a
+              href="#events"
+              className="text-sm text-zinc-400 hover:text-white"
+            >
               Events
             </a>
             <a href="#clubs" className="text-sm text-zinc-400 hover:text-white">
               For Clubs
             </a>
-            <a href="#services" className="text-sm text-zinc-400 hover:text-white">
+            <a
+              href="#services"
+              className="text-sm text-zinc-400 hover:text-white"
+            >
               Services
             </a>
-            <a href="#pricing" className="text-sm text-zinc-400 hover:text-white">
+            <a
+              href="#pricing"
+              className="text-sm text-zinc-400 hover:text-white"
+            >
               Pricing
             </a>
             <a href="#faq" className="text-sm text-zinc-400 hover:text-white">
@@ -278,18 +303,16 @@ export default function LandingPage() {
         {mobileMenu && (
           <div className="border-t border-white/5 bg-[#08080b] p-5 md:hidden">
             <div className="flex flex-col gap-4">
-              {["events", "clubs", "services", "pricing", "faq"].map(
-                (item) => (
-                  <a
-                    key={item}
-                    href={`#${item}`}
-                    onClick={() => setMobileMenu(false)}
-                    className="text-sm capitalize text-zinc-400"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
+              {["events", "clubs", "services", "pricing", "faq"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item}`}
+                  onClick={() => setMobileMenu(false)}
+                  className="text-sm capitalize text-zinc-400"
+                >
+                  {item}
+                </a>
+              ))}
 
               <div className="mt-2 flex gap-2">
                 <Link
@@ -312,79 +335,79 @@ export default function LandingPage() {
       </header>
 
       {/* ------------------------------------------------------------------ */}
-      {/* HERO — CURRENT MAIN EVENT                                          */}
+      {/* HERO — CURRENT MAIN EVENT | Evento Branding                        */}
       {/* ------------------------------------------------------------------ */}
 
-      <section className="relative min-h-screen pt-16">
+      <section className="relative min-h-screen overflow-hidden pt-16">
+        {/* Background */}
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=90&w=2200&auto=format&fit=crop"
-            alt=""
-            className="h-full w-full object-cover"
+          <div className="absolute inset-0 bg-[#08080b]" />
+
+          {/* Ambient gradients */}
+          <div className="absolute -left-32 top-20 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[140px]" />
+          <div className="absolute right-0 top-1/4 h-[600px] w-[600px] rounded-full bg-indigo-500/10 blur-[160px]" />
+          <div className="absolute bottom-0 left-1/3 h-[400px] w-[600px] rounded-full bg-violet-500/10 blur-[140px]" />
+
+          {/* Grid */}
+          <div
+            className="absolute inset-0 opacity-[0.035]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+              backgroundSize: "64px 64px",
+            }}
           />
 
-          <div className="absolute inset-0 bg-black/65" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08080b] via-transparent to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#08080b]/20 to-[#08080b]" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl items-end px-5 pb-16 pt-24 lg:px-8 lg:pb-24">
-
-          <div className="max-w-3xl">
-
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs font-medium backdrop-blur-md">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-              Happening now
+        {/* Content */}
+        <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl items-center px-5 py-24 lg:px-8">
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-medium text-zinc-300 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+              Built for student communities
             </div>
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-violet-300">
-              AWS User Group Bhilai
-            </p>
-
-            <h1 className="text-5xl font-semibold leading-[0.98] tracking-tight sm:text-6xl lg:text-8xl">
-              AWS Student
+            {/* Heading */}
+            <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
+              Everything your
               <br />
-              Community Day
+              community needs.
               <br />
-              <span className="text-violet-400">Bhilai 2026</span>
+              <span className="text-violet-400">One place.</span>
             </h1>
 
-            <p className="mt-7 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-              Builders of Tomorrow. A community-driven technology
-              experience bringing students, developers and cloud
-              enthusiasts together.
+            {/* Description */}
+            <p className="mt-8 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
+              Evento gives college clubs and student communities their own
+              digital home to manage events, members, registrations, attendance
+              and more — without the complexity.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-4 text-sm text-zinc-300">
-              <span className="flex items-center gap-2">
-                <CalendarDays className="h-4 w-4 text-violet-400" />
-                26 September 2026
-              </span>
-
-              <span className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-violet-400" />
-                SSTC Auditorium, Bhilai
-              </span>
-            </div>
-
+            {/* CTAs */}
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                href="/events/aws-student-community-day-bhilai-2026"
+                href="/register"
                 className="group flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-zinc-200"
               >
-                View event
+                Create your community
                 <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
               <Link
                 href="/events"
-                className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-medium backdrop-blur-md transition hover:bg-white/10"
+                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-zinc-200 backdrop-blur-md transition hover:bg-white/[0.08]"
               >
                 Explore events
               </Link>
             </div>
           </div>
         </div>
+
+        {/* Bottom fade */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#08080b] to-transparent" />
       </section>
 
       {/* ------------------------------------------------------------------ */}
@@ -393,7 +416,6 @@ export default function LandingPage() {
 
       <section id="events" className="relative py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-
           <SectionHeading
             eyebrow="Discover"
             title="What's happening next."
@@ -483,7 +505,6 @@ export default function LandingPage() {
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/10 blur-[120px]" />
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 lg:grid-cols-2 lg:px-8">
-
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/5 px-3 py-1.5 text-xs font-medium text-violet-300">
               <Sparkles className="h-3.5 w-3.5" />
@@ -493,15 +514,13 @@ export default function LandingPage() {
             <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
               Your club.
               <br />
-              <span className="text-violet-400">
-                Your own space.
-              </span>
+              <span className="text-violet-400">Your own space.</span>
             </h2>
 
             <p className="mt-6 max-w-lg text-base leading-7 text-zinc-400">
-              Turn your club into a complete digital community.
-              Create events, manage members, publish announcements
-              and give your audience a dedicated branded experience.
+              Turn your club into a complete digital community. Create events,
+              manage members, publish announcements and give your audience a
+              dedicated branded experience.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -539,7 +558,6 @@ export default function LandingPage() {
             <div className="absolute -inset-5 rounded-[2rem] bg-violet-600/10 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
-
               <div className="flex h-11 items-center gap-1.5 border-b border-white/5 bg-zinc-950 px-4">
                 <div className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
                 <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/60" />
@@ -561,9 +579,7 @@ export default function LandingPage() {
                       <p className="text-xs font-semibold">
                         AWS Student Community
                       </p>
-                      <p className="text-[10px] text-zinc-600">
-                        Bhilai
-                      </p>
+                      <p className="text-[10px] text-zinc-600">Bhilai</p>
                     </div>
                   </div>
 
@@ -601,9 +617,11 @@ export default function LandingPage() {
       {/* SERVICES                                                           */}
       {/* ------------------------------------------------------------------ */}
 
-      <section id="services" className="border-y border-white/5 bg-zinc-950 py-24 lg:py-32">
+      <section
+        id="services"
+        className="border-y border-white/5 bg-zinc-950 py-24 lg:py-32"
+      >
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-
           <SectionHeading
             eyebrow="Everything in one place"
             title="Tools that make events easier."
@@ -623,9 +641,7 @@ export default function LandingPage() {
                     <Icon className="h-5 w-5" />
                   </div>
 
-                  <h3 className="text-base font-semibold">
-                    {service.title}
-                  </h3>
+                  <h3 className="text-base font-semibold">{service.title}</h3>
 
                   <p className="mt-3 text-sm leading-6 text-zinc-500">
                     {service.description}
@@ -645,11 +661,10 @@ export default function LandingPage() {
 
       <section id="pricing" className="py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-
           <SectionHeading
             eyebrow="Simple pricing"
-            title="Start free. Scale when you need."
-            description="Choose the tools that match your community or organization."
+            title="Start free. Pay when you need."
+            description="Built for student clubs — no monthly subscriptions, no unnecessary commitments."
           />
 
           <div className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -668,19 +683,17 @@ export default function LandingPage() {
                   </div>
                 )}
 
-                <p className="text-sm font-medium text-zinc-400">
-                  {plan.name}
-                </p>
+                <p className="text-sm font-medium text-zinc-400">{plan.name}</p>
 
-                <div className="mt-5 flex items-end gap-1">
-                  <span className="text-4xl font-semibold">
-                    {plan.price}
-                  </span>
+                <div className="mt-5 flex items-end gap-2">
+                  <span className="text-4xl font-semibold">{plan.price}</span>
 
-                  {plan.price !== "Custom" && (
-                    <span className="pb-1 text-sm text-zinc-600">
-                      /month
-                    </span>
+                  {plan.name === "Event Pass" && (
+                    <span className="pb-1 text-sm text-zinc-500">/ event</span>
+                  )}
+
+                  {plan.name === "Club" && (
+                    <span className="pb-1 text-sm text-zinc-500">/ year</span>
                   )}
                 </div>
 
@@ -696,9 +709,11 @@ export default function LandingPage() {
                       : "border border-zinc-800 bg-zinc-900 hover:bg-zinc-800"
                   }`}
                 >
-                  {plan.name === "Organization"
-                    ? "Contact us"
-                    : "Get started"}
+                  {plan.name === "Free"
+                    ? "Get started"
+                    : plan.name === "Event Pass"
+                    ? "Create an event"
+                    : "Choose Club"}
                 </Link>
 
                 <div className="my-7 h-px bg-white/5" />
@@ -717,6 +732,16 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+
+          <p className="mt-8 text-center text-sm text-zinc-600">
+            Need Evento for your entire college?{" "}
+            <Link
+              href="/contact"
+              className="text-violet-400 hover:text-violet-300"
+            >
+              Talk to us →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -736,8 +761,8 @@ export default function LandingPage() {
             </h2>
 
             <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-violet-100">
-              Create an event, discover your next experience, or
-              build a digital home for your community.
+              Create an event, discover your next experience, or build a digital
+              home for your community.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -765,7 +790,6 @@ export default function LandingPage() {
 
       <section id="faq" className="border-t border-white/5 py-24 lg:py-32">
         <div className="mx-auto max-w-3xl px-5 lg:px-8">
-
           <SectionHeading
             eyebrow="Questions"
             title="Frequently asked questions."
@@ -779,9 +803,7 @@ export default function LandingPage() {
               return (
                 <div key={faq.question}>
                   <button
-                    onClick={() =>
-                      setOpenFaq(isOpen ? null : index)
-                    }
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="flex w-full items-center justify-between gap-5 py-6 text-left"
                   >
                     <span className="text-sm font-medium text-zinc-200 sm:text-base">
@@ -813,7 +835,6 @@ export default function LandingPage() {
 
       <footer className="border-t border-white/5 bg-zinc-950">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600">
               <Ticket className="h-4 w-4" />
@@ -863,7 +884,7 @@ function SectionHeading({
   description: string;
 }) {
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-violet-400">
         {eyebrow}
       </p>
@@ -879,13 +900,7 @@ function SectionHeading({
   );
 }
 
-function MiniStat({
-  value,
-  label,
-}: {
-  value: string;
-  label: string;
-}) {
+function MiniStat({ value, label }: { value: string; label: string }) {
   return (
     <div className="rounded-xl border border-white/5 bg-zinc-950 p-3 text-center">
       <p className="text-sm font-semibold">{value}</p>
