@@ -127,7 +127,6 @@
 //     "/((?!api|_next/static|_next/image|favicon.ico).*)",
 //   ],
 // };
-
 import { NextRequest, NextResponse } from "next/server";
 
 const TENANT_DOMAIN = "localhost";
@@ -158,8 +157,25 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Pass slug to tenant page
-  url.pathname = "/tenant";
+  /*
+   * Rewrite:
+   *
+   * aws.localhost:3000/
+   *     -> /tenant
+   *
+   * aws.localhost:3000/admin
+   *     -> /tenant/admin
+   *
+   * aws.localhost:3000/admin/events
+   *     -> /tenant/admin/events
+   *
+   * aws.localhost:3000/admin/events/new
+   *     -> /tenant/admin/events/new
+   */
+
+  url.pathname = `/tenant${url.pathname}`;
+
+  // Pass tenant slug to the tenant pages
   url.searchParams.set("slug", slug);
 
   return NextResponse.rewrite(url);
