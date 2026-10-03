@@ -58,6 +58,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 
 /* -------------------------------------------------------------------------- */
 /* DATA                                                                       */
@@ -358,32 +359,30 @@ export default function LandingPage() {
             }}
           />
 
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#08080b]/20 to-[#08080b]" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#08080b]/20 to-[#08080b]" />
         </div>
 
         {/* Content */}
-        <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl items-center px-5 py-24 lg:px-8">
-          <div className="max-w-4xl">
+        <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl items-start justify-center px-5 py-24 lg:px-8">
+          <div className="max-w-5xl flex justify-center items-center flex-col">
             {/* Eyebrow */}
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-medium text-zinc-300 backdrop-blur-md">
+            <div className="mb-7 w-fit inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-3.5 py-2 text-xs font-medium text-zinc-300 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
               Built for student communities
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
-              Everything your
+            <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight sm:text-xl lg:text-6xl text-center">
+            The Home for Every Community.
               <br />
-              community needs.
-              <br />
-              <span className="text-violet-400">One place.</span>
+              <span className="text-violet-400 text-3xl ">Build your community. Power your events. Grow your impact.</span>
             </h1>
 
             {/* Description */}
-            <p className="mt-8 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
+            <p className="mt-8 max-w-2xl text-base text-center leading-7 text-zinc-400 sm:text-lg">
               Evento gives college clubs and student communities their own
               digital home to manage events, members, registrations, attendance
-              and more — without the complexity.
+              and more without the complexity.
             </p>
 
             {/* CTAs */}
@@ -398,7 +397,7 @@ export default function LandingPage() {
 
               <Link
                 href="/events"
-                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 py-3.5 text-sm font-medium text-zinc-200 backdrop-blur-md transition hover:bg-white/[0.08]"
+                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/4 px-6 py-3.5 text-sm font-medium text-zinc-200 backdrop-blur-md transition hover:bg-white/[0.08]"
               >
                 Explore events
               </Link>
@@ -406,8 +405,17 @@ export default function LandingPage() {
           </div>
         </div>
 
+        <div className="absolute inset-0 z-0 opacity-30 h-full w-full">
+          <Image
+            src="/images/landing/hero-illustration.png"
+            alt="Landing Background"
+            fill={true}
+            className="absolute inset-0 -z-10 h-auto w-screen mt-40"
+            />
+        </div>
+
         {/* Bottom fade */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#08080b] to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#08080b] to-transparent" />
       </section>
 
       {/* ------------------------------------------------------------------ */}
@@ -422,16 +430,17 @@ export default function LandingPage() {
             description="Find events worth showing up for."
           />
 
-          <div className="mt-12 flex gap-5 overflow-x-auto pb-5 [scrollbar-width:none]">
+          <div className="mt-12 flex gap-5 overflow-x-auto pb-5 scrollbar-none">
             {upcomingEvents.map((event) => (
               <article
                 key={event.title}
-                className="group min-w-[300px] max-w-[340px] flex-1 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/60 sm:min-w-[340px]"
+                className="group min-w-75 max-w-85 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/60 sm:min-w-[340px]"
               >
                 <div className="relative h-52 overflow-hidden">
-                  <img
+                  <Image
                     src={event.image}
                     alt={event.title}
+                    fill={true}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
 
